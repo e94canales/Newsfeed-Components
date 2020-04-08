@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Coranavirus Outbreak 2020',
+    date: 'April, 8 2020',
+    firstParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Velit ut tortor pretium viverra suspendisse potenti nullam ac. Ut lectus arcu bibendum at varius vel pharetra vel turpis. Dictum sit amet justo donec enim. Nec ullamcorper sit amet risus nullam. Magnis dis parturient montes nascetur ridiculus mus mauris vitae. Ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla. Lectus arcu bibendum at varius vel pharetra. Scelerisque eleifend donec pretium vulputate sapien. Imperdiet dui accumsan sit amet nulla. In iaculis nunc sed augue lacus viverra. Montes nascetur ridiculus mus mauris vitae ultricies. Egestas congue quisque egestas diam in arcu cursus euismod quis. Quis lectus nulla at volutpat diam ut. Massa sed elementum tempus egestas sed sed risus. Nibh tellus molestie nunc non blandit massa enim nec dui. Libero justo laoreet sit amet cursus sit amet dictum. Faucibus purus in massa tempor nec. Nisl purus in mollis nunc sed id semper risus in.',
+    secondParagraph: 'Montes nascetur ridiculus mus mauris vitae ultricies. Egestas congue quisque egestas diam in arcu cursus euismod quis. Quis lectus nulla at volutpat diam ut. Massa sed elementum tempus egestas sed sed risus. Nibh tellus molestie nunc non blandit massa enim nec dui. Libero justo laoreet sit amet cursus sit amet dictum. Faucibus purus in massa tempor nec. Nisl purus in mollis nunc sed id semper risus in.',
+    thirdParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Velit ut tortor pretium viverra suspendisse potenti nullam ac.'
   }
 ];
 
@@ -101,14 +108,61 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+  
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above. */
 
-  Step 3: return the entire component.
+  const articles = document.querySelector('.articles')
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  function makeComponent ({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+    // INIT
+    const articleContainer = document.createElement('div')
+    const titles = document.createElement('h2')
+    const dates = document.createElement('p')
+    const paraOne = document.createElement('p')
+    const paraTwo = document.createElement('p')
+    const paraThree = document.createElement('p')
+    const expandBtn = document.createElement('i')
 
-*/
+    // STRUCTURE
+    articleContainer.appendChild(titles)
+    articleContainer.appendChild(dates)
+    articleContainer.appendChild(paraOne)
+    articleContainer.appendChild(paraTwo)
+    articleContainer.appendChild(paraThree)
+    articleContainer.appendChild(expandBtn)
+
+    // CLASSES
+    articleContainer.classList.add('article')
+    dates.classList.add('date')
+    expandBtn.classList.add('expandButton', 'fas', 'fa-ellipsis-h')
+
+    // CONTENTS
+    titles.textContent = title
+    dates.textContent = date
+    paraOne.textContent = firstParagraph
+    paraTwo.textContent = secondParagraph
+    paraThree.textContent = thirdParagraph
+    // expandBtn.textContent = "V"
+
+    // EVENT
+    expandBtn.addEventListener('click', event => {
+      articleContainer.classList.toggle('article-open')
+    })
+
+    return articleContainer
+  }
+
+  // Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+
+  // Step 3: return the entire component.
+
+  // Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  const article = data.map(data => makeComponent(data))
+  article.forEach(article => {
+    articles.appendChild(article)
+  })
+  // Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+
+
