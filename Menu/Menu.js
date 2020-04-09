@@ -33,7 +33,7 @@ function createMenu (items) {
 
   // STRUCTURE
   menu.appendChild(ul)
-  
+
   // LIST LOOP
   items.forEach(menuitem => {
     const li = document.createElement('li')
@@ -44,6 +44,11 @@ function createMenu (items) {
   // EVENT
   menuBtn.addEventListener('click' , e => {
     menu.classList.toggle('menu--open')
+    menuAnimationIn()
+    let articles = document.querySelector('.articles')
+    articles.addEventListener('click', e => {
+      menu.classList.remove('menu--open')
+    })
   })
 
   return menu
@@ -64,4 +69,12 @@ header.appendChild(createMenu(menuItems))
 
   // Step 6: add the menu component to the DOM.
   
+  gsap.from('.articles', {opacity: 0, duration: 1.5, y: 500})
+  gsap.from('h1', {opacity: 0, duration: 1, x: 5000})
+  function menuAnimationIn () {
+    gsap.from('.menu', {opacity: 0, duration: 1, x: -500})
+    gsap.from('.menu-button', {duration: 1, rotation: 180})
+  }
 
+
+  

@@ -124,6 +124,7 @@ const data = [
     const paraTwo = document.createElement('p')
     const paraThree = document.createElement('p')
     const expandBtn = document.createElement('i')
+    const closeBtn = document.createElement('span')
 
     // STRUCTURE
     articleContainer.appendChild(titles)
@@ -132,11 +133,13 @@ const data = [
     articleContainer.appendChild(paraTwo)
     articleContainer.appendChild(paraThree)
     articleContainer.appendChild(expandBtn)
+    articleContainer.appendChild(closeBtn)
 
     // CLASSES
     articleContainer.classList.add('article')
     dates.classList.add('date')
     expandBtn.classList.add('expandButton', 'fas', 'fa-ellipsis-h')
+    closeBtn.classList.add('close', 'off', 'fas', 'fa-times-circle')
 
     // CONTENTS
     titles.textContent = title
@@ -145,10 +148,17 @@ const data = [
     paraTwo.textContent = secondParagraph
     paraThree.textContent = thirdParagraph
     // expandBtn.textContent = "V"
+    // closeBtn.textContent = 'close'
 
     // EVENT
     expandBtn.addEventListener('click', event => {
       articleContainer.classList.toggle('article-open')
+      closeBtn.classList.toggle('off')
+      closeBtn.addEventListener('click', e => {
+        articleContainer.classList.remove('article-open')
+        closeBtn.classList.add('off')
+      })
+      modalIn()
     })
 
     return articleContainer
@@ -165,4 +175,6 @@ const data = [
   })
   // Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
-
+  function modalIn () {
+    gsap.from('.article-open', {opacity: 0, duration: 1.8, x: -20})
+  }  
